@@ -17,10 +17,10 @@ pipeline {
         stage("Push to Docker Hub"){
             steps {
                 echo "Pushing the image..."
-                withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
+                withCredentials([usernamePassword(credentialsId:"DockerHub",passwordVariable:"password",usernameVariable:user")]){
                 sh "docker tag -note-app ${env.dockerHubUser}/note-app:latest"
-                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                sh "docker push ${env.dockerHubUser}/note-app:latest"
+                sh "docker login -u ${env.user} -p ${env.pass}"
+                sh "docker push ${env.user}/note-app:latest"
                 }
             }
         }
